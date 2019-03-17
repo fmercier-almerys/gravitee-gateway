@@ -83,6 +83,7 @@ public class EndpointHealthcheckVerticle extends AbstractVerticle implements Eve
                 stopHealthCheck(api);
                 break;
             case UPDATE:
+            case ENDPOINTS_UPDATE:
                 stopHealthCheck(api);
                 startHealthCheck(api);
                 break;

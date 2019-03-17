@@ -125,7 +125,7 @@ public class EndpointDiscoveryVerticle extends AbstractVerticle implements
                     if (endpoints == null) {
                         endpoints = new HashSet<>();
                     }
-                    DiscoveredEndpoint endpoint = createEndpoint(event.service(), group);
+                    final DiscoveredEndpoint endpoint = createEndpoint(event.service(), group);
                     switch (event.type()) {
                         case REGISTER:
                             endpoints.add(endpoint);
@@ -134,6 +134,7 @@ public class EndpointDiscoveryVerticle extends AbstractVerticle implements
                             endpoints.remove(endpoint);
                             break;
                     }
+                    eventManager.publishEvent(ReactorEvent.ENDPOINTS_UPDATE, api);
                 });
             } catch (Exception ex) {
                 LOGGER.error("An errors occurs while starting to listen from service discovery provider", ex);
